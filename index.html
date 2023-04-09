@@ -49,16 +49,16 @@
 		  //let text = await response.text()
 		  //document.getElementById("div").innerHTML = text;
 		var request = new XMLHttpRequest();
-		request.open('GET', "cit5students.json");
+		request.open('GET', 'cit5students.json');
 		
 		request.onload = function()
 		{
 			var data = JSON.parse(request.responseText);
 		
 			majors = data.filter(getMajor)
-			function getMajor(major)
+			function getMajor(info)
 			{
-				return major.info == selected_major;
+				return info.major == selected_major;
 			}
 			
 			if (request.status == 200)
@@ -79,7 +79,5 @@
 	}
 	
 	</script>
-			
-			
-			
+				
 </html>
