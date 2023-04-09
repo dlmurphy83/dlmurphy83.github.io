@@ -12,15 +12,15 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		
-		<style> .btn{margin: 1px} </style>
+		<style> .btn{margin: 5px} </style>
 	</head>
 	
 	<body>
 		<div class = "container">
 			<h2>Select a Major</h2>
-			<div style = 'padding: 1px;'>
+			<div style = 'padding: 5px;'>
 				<button type = 'button' class = "btn btn-primary" onClick = "getData('cit')">CIT Majors</button>
-				<button type = 'button' class = "btn btn-primary" onClick = "getData('lunch')">Business Majors</button>
+				<button type = 'button' class = "btn btn-primary" onClick = "getData('business')">Business Majors</button>
 			</div>
 			
 		<h3>We filter our dataset by major</h3>
@@ -49,7 +49,7 @@
 		  //let text = await response.text()
 		  //document.getElementById("div").innerHTML = text;
 		var request = new XMLHttpRequest();
-		request.open('GET', 'cit5students.json');
+		request.open('GET', "cit5students.json");
 		
 		request.onload = function()
 		{
