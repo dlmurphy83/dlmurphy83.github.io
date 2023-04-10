@@ -1,21 +1,30 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- Tells the browswer the markup language is HTML -->
 
-<html lang = "en">
+<!-- David Murphy -->
+<!-- CIT 140-55Z1 -->
+<!-- JavaScript I -->
+<!-- Spring 2023 -->
+
+<html lang = "en"> <!-- sets the language to english -->
 
 	<head>
-		<meta charset = "utf-8">
+		<meta charset = "utf-8"> <!-- use of standard character encoding -->
+		<!-- gives the browser instructions on how to control the page's dimensions and scaling -->
 		<meta name = "viewport" content="width = device-width, initial-scale = 1.0">
 		<title>Programming Project 5</title>
 		
+		<!-- used to allow use of bootstrap and ajax libraries -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		
+		<!-- Bootstrap class for styling buttons -->
 		<style> .btn{margin: 5px} </style>
 	</head>
 	
 	<body>
+		<!-- class provides a responsive fixed width container to wrap site contents inside -->
 		<div class = "container">
 			<h2>Select a Major</h2>
 			<div style = 'padding: 5px;'>
@@ -28,6 +37,7 @@
 		</div>
 	</body>
 	
+	<!-- handlebars is used to help generate HTML table -->
 	<script type = "text/x-handlebars-template" id = "tableTemplate">
 		<table class = "table table-striped">
 			<tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
@@ -40,33 +50,29 @@
 	</script>
 	
 	<script>
-	//async function getData(selected_major)
+	
 	function getData(selected_major)
 	{
-		  //var url = 'cit5students.json';
-		  
-		  //let response = await fetch(url);
-		  //let text = await response.text()
-		  //document.getElementById("div").innerHTML = text;
+		
 		var request = new XMLHttpRequest();
-		request.open('GET', 'cit5students.json');
+		request.open('GET', 'cit5students.json'); // requesting data from file provided
 		
 		request.onload = function()
 		{
 			var data = JSON.parse(request.responseText);
 		
-			majors = data.filter(getMajor)
+			majors = data.filter(getMajor)// filter data by major
 			function getMajor(info)
 			{
 				return info.major == selected_major;
 			}
 			
-			if (request.status == 200)
+			if (request.status == 200) // sucessful connection
 			{
 				var templateText = document.getElementById('tableTemplate').innerHTML;
-				var compiledTemplateText = Handlebars.compile(templateText);
-				compiledHtml = compiledTemplateText({ rows: majors })
-				document.getElementById('dataTable').innerHTML = compiledHtml;
+				var compiledTemplateText = Handlebars.compile(templateText); // compile data
+				compiledHtml = compiledTemplateText({ rows: majors }) // apply data to template
+				document.getElementById('dataTable').innerHTML = compiledHtml; //data sent to division
 			}
 			
 			else
