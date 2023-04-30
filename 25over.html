@@ -66,7 +66,7 @@
 				data() {     // returns an object of data
 					return {
 						tickets: [],           // array to hold student data
-						//tickets1: [],
+						tickets1:[],
 						   }
 					   },
 				created() {      // section executes as page loads
@@ -76,7 +76,7 @@
 					async getData() {
 						const response = await fetch('tickets1.json')
 						this.tickets = await response.json()
-						tickets = tickets.filter( (ticket) => (ticket.actual_speed - ticket.posted_speed) >=26)
+						this.tickets1 = tickets.filter( (ticket) => (ticket.actual_speed - ticket.posted_speed) >=26)
 						//console.log(tickets1)
 								    },
 					//getSpeed()		{
