@@ -1,0 +1,100 @@
+<!DOCTYPE html> <!-- Tells the browswer the markup language is HTML -->
+
+<!-- David Murphy -->
+<!-- CIT 140-55Z1 -->
+<!-- JavaScript I -->
+<!-- Spring 2023 -->
+
+<html lang = "en"> <!-- sets the language to english -->
+
+	<head>
+		<meta charset = "utf-8"> <!-- use of standard character encoding -->
+		<!-- gives the browser instructions on how to control the page's dimensions and scaling -->
+		<meta name = "viewport" content="width = device-width, initial-scale = 1.0">
+		<title>Filtered Tickets</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		
+		<script src="https://unpkg.com/vue@next"></script> 
+
+	</head>
+	
+	<body>
+		
+		<div class = "container">
+		<nav class = "navbar navbar-inverse">
+			
+			<div class = "navbar-header">
+				<a class = "navbar-brand" href = "#">Our Website</a>
+			</div>
+			<div>
+				<ul class "nav navbar-nav">
+					<li class="active"><a href="index.html">All Tickets</a></li>
+					<li><a href="25over.html">25mph or more over</a></li>
+					<!--<li><a href = "index.html">All Tickets</a></li> -->
+					<!--<li><class = "active"><a href = "25over.html">25mph or more over</a></li> -->
+				</ul>
+			</div>
+		</nav>
+		
+		<div id="ticketApp">
+
+			<h2>Tickets July 4, 2014, Minneapolis/St. Paul</h2>
+          
+			<table class="table table-bordered table-striped">
+              <tr>
+                  <th>Ticket ID</th>
+                  <th>Time</th>
+                  <th>Posted Speed</th>
+                  <th>MPH Over</th>
+                  <th>Violator Sex</th>
+              </tr>
+              <tr v-for = "ticket in tickets">
+                  <td>{{ticket.tid}}</td>
+                  <td>{{ticket.stop_time}}</td>
+                  <td>{{ticket.posted_speed}}</td>
+                  <td>{{ticket.actual_speed - ticket.posted_speed}}</td> 
+                  <td>{{ticket.violator_sex}}</td>
+              </tr>
+			</table>
+		</div>
+		</div>
+		
+		<script>
+			let app = Vue.createApp({
+				data() {     // returns an object of data
+					return {
+		
+						tickets: [],           // array to hold student data
+						tickets1:[],
+						
+						   }
+					   },
+				created() {      // section executes as page loads
+					
+					this.getData()  // load json data as page loads
+						  },
+				methods: {    // ajax request
+					async getData() {
+						const response = await fetch('tickets1.json')
+						this.tickets = await response.json()
+						//for(var i = 0; i < this.tickets.length; i++)
+						//{
+							//if (this.tickets[i].[ticket.actual_speed-ticket.posted_speed] >=26)
+							//{
+								//this.tickets1.push(this.tickets[i])
+							//}
+						//}
+						//this.tickets1 = tickets.filter( (ticket) => (ticket.actual_speed - ticket.posted_speed) >=26)
+						//console.log(tickets1)
+								    						   
+						this.tickets1 = this.tickets.filter( (ticket) => (ticket.actual_speed - ticket.posted_speed) >=26);// == this.((actual_speed - posted_speed) >=26); 
+									},
+								}
+						 })
+      
+			app.mount('#ticketApp')   //in which div to mount the vue app
+		</script>
+	</body>
+</html>
