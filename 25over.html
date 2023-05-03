@@ -73,13 +73,13 @@
 					   },
 				created() {      // section executes as page loads
 					
-					//this.getData()  // load json data as page loads
-					this.filterData()
+					this.getData()  // load json data as page loads
+					//this.filterData()
 						  },
 				methods: {    // ajax request
-					//async getData() {
-						//const response = await fetch('tickets1.json')
-						//this.tickets = await response.json()
+					async getData() {
+						const response = await fetch('tickets1.json')
+						this.tickets = await response.json()
 						//for(var i = 0; i < this.tickets.length; i++)
 						//{
 							//if (this.tickets[i].[ticket.actual_speed-ticket.posted_speed] >=26)
@@ -90,13 +90,13 @@
 						//this.tickets1 = tickets.filter( (ticket) => (ticket.actual_speed - ticket.posted_speed) >=26)
 						//console.log(tickets1)
 								    						   
-						//this.tickets1 = this.tickets.filter( (ticket) => (ticket.actual_speed - ticket.posted_speed) >=26);// == this.((actual_speed - posted_speed) >=26); 
+						this.tickets1 = this.tickets.filter( (ticket) => (ticket.actual_speed - ticket.posted_speed) >=26);// == this.((actual_speed - posted_speed) >=26); 
 									},
-							filterData(){
-											this.tickets1 = this.tickets.filter( (ticket) => (ticket.actual_speed - ticket.posted_speed) >= 26)
+							//filterData(){
+								//			this.tickets1 = this.tickets.filter( (ticket) => (ticket.actual_speed - ticket.posted_speed) >= 26)
 										
-										}
-								//}
+									//	}
+								}
 						 })
       
 			app.mount('#ticketApp')   //in which div to mount the vue app
